@@ -6,8 +6,9 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 fun main() {
-   // manyRunBlockRequests()
-    manyScopeRequest()
+    // manyRunBlockRequests()
+    //manyScopeRequest()
+    callToSuspendFunction()
 }
 
 /**
@@ -26,10 +27,25 @@ fun manyRunBlockRequests() = runBlocking {
  */
 fun manyScopeRequest() = runBlocking {
     GlobalScope.launch {
-        repeat(100){
+        repeat(100) {
             delay(3000)
             print("I am in scope")
         }
     }
     delay(10000)
+}
+
+fun callToSuspendFunction() = runBlocking {
+    launch {
+        doSomething()
+    }
+}
+
+/**
+ *Suspend function
+ */
+
+suspend fun doSomething(){
+    delay(1000)
+    println("Print from suspend function")
 }
