@@ -19,7 +19,7 @@ abstract class LocalDatabase: RoomDatabase() {
                  context.applicationContext,
                  LocalDatabase::class.java,
                  "user_database"
-             ).fallbackToDestructiveMigration().build()
+             ).build()
                 INSTANCE = instance
                 instance
             }

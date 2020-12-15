@@ -12,7 +12,7 @@ interface UserDao {
     @Query("SELECT * FROM users WHERE first_name like :firstName AND last_name like :lastName")
     fun findByName(firstName: String, lastName: String): User
 
-    @Query("SELECT * FROM users WHERE uid like :userId")
+    @Query("SELECT * FROM users WHERE uid like :userId LIMIT 1")
     fun findById(userId: String)
 
     @Query("DELETE FROM users")
