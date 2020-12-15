@@ -45,7 +45,7 @@ fun callToSuspendFunction() = runBlocking {
  *Suspend function
  */
 
-suspend fun doSomething(){
+suspend fun doSomething() {
     delay(1000)
     println("Print from suspend function")
 }
