@@ -2,10 +2,23 @@ package com.example.pagingworkshop.training
 
 import kotlinx.coroutines.*
 
+var acquire = 0
+
+class Resource {
+    init {
+        acquire++
+    }
+
+    fun close() {
+        acquire--
+    }
+}
+
 fun main() {
     print("Coroutine timeout")
-    timeOutUsage()
-    timeOutOrNullUsage()
+    //timeOutUsage()
+    //timeOutOrNullUsage()
+    timeOutAsyncExample()
 }
 
 fun timeOutUsage() = runBlocking {
@@ -38,4 +51,37 @@ fun timeOutOrNullUsage() = runBlocking {
             println("cancelled")
         }
     }
+}
+
+//Bad practise : acquire will not always 0
+fun timeOutAsyncExample() = runBlocking {
+    repeat(100) {
+        launch {
+            val resource = withTimeout(60) {
+                delay(50)
+                Resource()
+            }
+            resource.close()
+        }
+    }
+    // called when the timeout ends
+    print("Acquire is $acquire")
+}
+
+//Best practise: acquire will always 0
+fun timeOutAsyncBetterExample() = runBlocking {
+    var resource: Resource? = null
+    repeat(100) {
+        launch {
+            try {
+                withTimeout(60) {
+                    delay(50)
+                    resource = Resource()
+                }
+            } finally {
+                resource?.close()
+            }
+        }
+    }
+    print("Acquire is $acquire")
 }
