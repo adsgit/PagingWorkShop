@@ -19,6 +19,7 @@ fun main() {
     //timeOutUsage()
     //timeOutOrNullUsage()
     timeOutAsyncExample()
+    timeOutAsyncBetterExample()
 }
 
 fun timeOutUsage() = runBlocking {
