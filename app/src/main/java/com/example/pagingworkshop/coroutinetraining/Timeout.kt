@@ -1,4 +1,4 @@
-package com.example.pagingworkshop.training
+package com.example.pagingworkshop.coroutinetraining
 
 import kotlinx.coroutines.*
 
@@ -68,7 +68,7 @@ fun timeOutAsyncExample() = runBlocking {
     print("Acquire is $acquire")
 }
 
-//Best practise: acquire will always 0
+//Best practise: acquire will always 0, leaking prevented
 fun timeOutAsyncBetterExample() = runBlocking {
     var resource: Resource? = null
     repeat(100) {

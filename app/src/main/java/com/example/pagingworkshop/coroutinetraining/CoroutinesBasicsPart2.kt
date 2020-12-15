@@ -1,4 +1,4 @@
-package com.example.pagingworkshop.training
+package com.example.pagingworkshop.coroutinetraining
 
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
