@@ -1,9 +1,6 @@
 package com.example.pagingworkshop.home.model.local
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Query
+import androidx.room.*
 import com.example.pagingworkshop.home.model.entities.User
 
 @Dao
@@ -18,12 +15,12 @@ interface UserDao {
     @Query("SELECT * FROM users WHERE uid like :userId")
     fun findById(userId: String)
 
-    @Delete
+    @Query("DELETE FROM users")
     fun deleteAll()
 
-    @Query("DELETE FROM users WHERE uid like :userID")
+    @Delete
     fun deleteUser(userID: Long)
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertUser(user: User)
 }

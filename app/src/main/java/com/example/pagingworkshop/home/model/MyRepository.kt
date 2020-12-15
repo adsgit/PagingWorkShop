@@ -3,7 +3,7 @@ package com.example.pagingworkshop.home.model
 import com.example.pagingworkshop.home.model.entities.User
 import com.example.pagingworkshop.home.model.local.UserDao
 
-class MyRepository(val userDao: UserDao) {
+class MyRepository(private val userDao: UserDao) {
 
     suspend fun insertUser(user: User) {
         userDao.insertUser(user)
